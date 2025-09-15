@@ -1,11 +1,12 @@
-name: Scheduled Dev to Main Merge
+name: Scheduled Stage to Main Merge
 
 on:
+  workflow_dispatch: # Allows manual triggering
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '30 5 * * *' # 10:30 AM IST
 
 jobs:
-  merge-dev-to-main:
+  merge-stage-to-main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main branch
@@ -21,7 +22,7 @@ jobs:
       - name: Fetch stage branch
         run: git fetch origin stage
 
-      - name: Merge dev into main
+      - name: Merge stage into main
         run: |
           git merge origin/stage --no-ff --no-edit || true
 
