@@ -3,7 +3,7 @@ name: Scheduled Stage to Main Merge
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 5 * * *'
+    - cron: '30 5 * * *' # 11:00 AM IST
 
 jobs:
   merge-stage-to-main:
@@ -24,7 +24,7 @@ jobs:
 
       - name: Merge stage into main
         run: |
-          git merge origin/stage --no-ff --no-edit
+          git merge origin/stage --no-ff --no-edit --allow-unrelated-histories
 
       - name: Show git status
         run: git status
