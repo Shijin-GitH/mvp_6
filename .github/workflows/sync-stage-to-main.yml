@@ -1,9 +1,9 @@
 name: Scheduled Stage to Main Merge
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
   schedule:
-    - cron: '30 5 * * *' # 10:30 AM IST
+    - cron: '30 5 * * *'
 
 jobs:
   merge-stage-to-main:
@@ -24,7 +24,13 @@ jobs:
 
       - name: Merge stage into main
         run: |
-          git merge origin/stage --no-ff --no-edit || true
+          git merge origin/stage --no-ff --no-edit
+
+      - name: Show git status
+        run: git status
+
+      - name: Show git log
+        run: git log --oneline --graph --all
 
       - name: Push changes to main
         env:
